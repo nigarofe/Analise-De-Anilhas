@@ -1,5 +1,13 @@
-let nomeDoPeso = ["TG", "TM", "TP", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "I"];
-let pesoDoPeso = [7905, 5134, 4318, 5074, 4462, 5640, 2352, 2273, 903, 875, 484, 462, 644];
+// Todos
+// let nomeDoPeso = ["TG", "TM", "TP", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "I"];
+// let pesoDoPeso = [7905, 5134, 4318, 5074, 4462, 5640, 2352, 2273, 903, 875, 484, 462, 644];
+// let pesoMaximo = 40000
+
+// Só anilhas
+let nomeDoPeso = ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9"];
+let pesoDoPeso = [5074, 4462, 5640, 2352, 2273, 903, 875, 484, 462];
+let pesoMaximo = 22000
+
 let quantidadeDePesos = nomeDoPeso.length;
 
 // for (let i = 0; i < nomeDoPeso.length; i++) {
@@ -32,7 +40,7 @@ for (let i = 0; i <= Math.pow(2, quantidadeDePesos); i++) {
     listaDePesoTotalDaPossibilidade.push(pesoTotalDaPossibilidade);
 }
 
-for (let i = 1000; i <= 40000; i += 1000) {
+for (let i = 1000; i <= pesoMaximo; i += 1000) {
     let menorDiferenca = Number.MAX_VALUE;
     let melhorPossibilidade = -1;
     for (let j = 0; j < listaDePesoTotalDaPossibilidade.length; j++) {
@@ -46,15 +54,15 @@ for (let i = 1000; i <= 40000; i += 1000) {
             melhorPossibilidade = j;
         }
     }
-    let resposta = "";
+
+    let combinacaoDePesos = "";
     for (let j = 0; j < quantidadeDePesos; j++) {
         if (listaDePossibilidades[melhorPossibilidade][j] == 1) {
-            resposta += nomeDoPeso[j] + " ";
+            combinacaoDePesos += nomeDoPeso[j] + " ";
         }
     }
 
-    let output = "Para " + i + "g, o peso mais próximo é " + listaDePesoTotalDaPossibilidade[melhorPossibilidade] + ", usando a combinação de pesos " + resposta;
-
+    // Criação da tabela HTML
     let table = document.getElementById("table");
     let tr = document.createElement("tr");
 
@@ -64,7 +72,7 @@ for (let i = 1000; i <= 40000; i += 1000) {
     let td4 = document.createElement("td");
 
     let d1 = document.createTextNode(i / 1000 + "kg");
-    let d2 = document.createTextNode(resposta);
+    let d2 = document.createTextNode(combinacaoDePesos);
     let d3 = document.createTextNode(listaDePesoTotalDaPossibilidade[melhorPossibilidade] + "g");
     let d4 = document.createTextNode(listaDePesoTotalDaPossibilidade[melhorPossibilidade] - i + "g");
 
